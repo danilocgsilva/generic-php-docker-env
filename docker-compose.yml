@@ -1,0 +1,49 @@
+version: '3.5'
+
+services:
+  webserver:
+    build:
+      context: ./docker/env
+    ports:
+      - 80:80
+    working_dir: /var/www
+    volumes:
+      - ./file_envs:/var/www
+    container_name: php
+    links:
+      - db
+  db:
+    image: mariadb:10.7
+    ports:
+      - 3306:3306
+    container_name: db
+    environment:
+      MYSQL_ROOT_PASSWORD: phppass
+      MYSQL_USER: phpuser
+      MYSQL_PASSWORD: phppass
+      MYSQL_DATABASE: your_application
+  frontend:
+    build:
+      context: ./docker/frontend
+    container_name: frontend
+    volumes:
+      - ./file_envs:/var/www
+  phpmyadmin:
+    image: phpmyadmin
+    container_name: phpmyadmin
+    links:
+      - db
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+      PMA_USER: root
+      PMA_PASSWORD: phppass
+      MYSQL_ROOT_PASSWORD: phppass
+      MYSQL_USER: phpuser
+      MYSQL_PASSWORD: phppass
+      UPLOAD_LIMIT: 512M
+      MEMORY_LIMIT: 512M
+    ports:
+      - 8080:80
+    volumes:
+      - /sessions
