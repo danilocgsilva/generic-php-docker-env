@@ -4,6 +4,6 @@
 
 2. Put your application files in `file_envs`.
 
-3. Execute: `docker-compose up -d --build`
+3. Run `start.sh` from the command line and answer the question.
 
 DONE!
