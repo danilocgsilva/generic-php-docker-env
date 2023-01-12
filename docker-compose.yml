@@ -5,18 +5,18 @@ services:
     build:
       context: ./docker/env
     ports:
-      - 80:80
+      - ${PHP_PORT}:80
     working_dir: /var/www
     volumes:
-      - ./file_envs:/var/www
-    container_name: php
+      - ./www:/var/www/html
+    container_name: ${PHP_CONTAINER_NAME}
     links:
       - db
   db:
     image: mariadb:10.7
     ports:
       - 3306:3306
-    container_name: db
+    container_name: ${DB_CONTAINER_NAME}
     environment:
       MYSQL_ROOT_PASSWORD: phppass
       MYSQL_USER: phpuser
@@ -27,23 +27,5 @@ services:
       context: ./docker/frontend
     container_name: frontend
     volumes:
-      - ./file_envs:/var/www
-  phpmyadmin:
-    image: phpmyadmin
-    container_name: phpmyadmin
-    links:
-      - db
-    environment:
-      PMA_HOST: db
-      PMA_PORT: 3306
-      PMA_USER: root
-      PMA_PASSWORD: phppass
-      MYSQL_ROOT_PASSWORD: phppass
-      MYSQL_USER: phpuser
-      MYSQL_PASSWORD: phppass
-      UPLOAD_LIMIT: 512M
-      MEMORY_LIMIT: 512M
-    ports:
-      - 8080:80
-    volumes:
-      - /sessions
+      - ./www:/var/www/html
+

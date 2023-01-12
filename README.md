@@ -1,12 +1,12 @@
 # Generic PHP docker environment
 
-1. Create a folder called `file_envs`
+1. Put your application files in `www`.
 
-2. Put your application files in `file_envs`.
-
-3. Run `start.sh` from the command line and answer the question.
+2. Run `start.sh` from the command line and answer the question.
 
 DONE!
+
+**Note:** you may change environment data from `.env` file.
 
 ## If I want to run docker before having a real application in the `file_envs`
 
