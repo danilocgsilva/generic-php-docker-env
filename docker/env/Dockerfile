@@ -1,4 +1,5 @@
-FROM debian:stable-20220912-slim
+#FROM debian:stable-20220912-slim
+FROM debian:stable-slim
 RUN apt-get update && apt-get upgrade -y
 RUN apt-get install apache2 curl git zip -y 
 COPY ./000-default.conf /etc/apache2/sites-available/000-default.conf
@@ -10,7 +11,14 @@ RUN echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" | tee /etc
 RUN curl -fsSL  https://packages.sury.org/php/apt.gpg| gpg --dearmor -o /etc/apt/trusted.gpg.d/sury-keyring.gpg
 RUN apt-get update
 RUN apt-get install php8.2 -y
-RUN apt-get install php8.2-dom php8.2-zip php8.2-curl php8.2-mysql php8.2-mbstring -y
+RUN apt-get install \ 
+    php8.2-dom \
+    php8.2-zip \
+    php8.2-curl \
+    php8.2-mysql \
+    php8.2-mbstring \
+    php8.2-gd \
+    -y
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin/ --filename=composer
 EXPOSE 80
 WORKDIR /var/www

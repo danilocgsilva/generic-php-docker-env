@@ -1,19 +1,10 @@
 # Generic PHP docker environment
 
-1. Put your application files in `www`.
-
-2. Run `start.sh` from the command line and answer the question.
-
-DONE!
-
 **Note:** you may change environment data from `.env` file.
 
-## If I want to run docker before having a real application in the `file_envs`
+Run the command: `docker-compose up --build`
 
-1. Go to `docker/env`
+This application builds a basic php environment with a relational database. Propper to install application like Wordpress, Laravel, Symfony, Drupal, etc.
 
-2. Build a image: `docker build -t myphpenv .`
-
-3. Run the image as container: `docker run -tid --name myphpenv myphpenv`
-
-4. Enters in the container: `docker exec -it myphpenv bash`
+* The database credentials can be found in the `docker-compose.yml` file in the project root folder.
+* Check out details from environment, like Linux distro in which this project has been based, as well php version and it's installed extensions.
