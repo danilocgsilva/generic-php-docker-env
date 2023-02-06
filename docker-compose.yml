@@ -1,0 +1,30 @@
+version: '3.5'
+
+services:
+  webserver:
+    build:
+      context: ./docker/env
+    ports:
+      - ${PHP_PORT}:80
+    working_dir: /var/www
+    volumes:
+      - ./www:/var/www/html
+    container_name: ${PHP_CONTAINER_NAME}
+    links:
+      - db
+  db:
+    image: mariadb:10.7
+    ports:
+      - 3306:3306
+    container_name: ${DB_CONTAINER_NAME}
+    environment:
+      MYSQL_ROOT_PASSWORD: phppass
+      MYSQL_USER: phpuser
+      MYSQL_PASSWORD: phppass
+      MYSQL_DATABASE: your_application
+  frontend:
+    build:
+      context: ./docker/frontend
+    container_name: frontend
+    volumes:
+      - ./www:/var/www/html
