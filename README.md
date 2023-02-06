@@ -1,6 +1,6 @@
 # Generic PHP docker environment
 
-**Note:** you may change environment data from `.env` file.
+**Note:** to make stuffs works, copy the `.env.example` to a `.env`. If required, you may change the values in `.env` file.
 
 Run the command: `docker-compose up --build`
 
