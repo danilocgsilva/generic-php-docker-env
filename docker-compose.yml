@@ -27,4 +27,4 @@ services:
       context: ./docker/frontend
     container_name: ${NODE_CONTAINER_NAME}
     volumes:
-      - ./app:/var/www/html
+      - ./www:/app
