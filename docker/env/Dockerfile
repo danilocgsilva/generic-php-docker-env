@@ -18,6 +18,7 @@ RUN apt-get install \
     php8.2-mysql \
     php8.2-mbstring \
     php8.2-gd \
+    php8.2-xdebug \
     -y
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin/ --filename=composer
 EXPOSE 80
